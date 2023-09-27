@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>calcultor v</title>
+    <style>
+        button
+        {
+            width: 50px;
+            height: 50px;
+            margin: 2px;
+            border: 0px;
+            border-radius: 10px;
+        }
+        .oper
+        {
+            background-color: rgb(117, 160, 239);
+            color: blue;    
+        }
+        .num
+        {
+            background-color: rgb(206, 215, 246);
+        }
+        #field
+        {
+            border-top: 5px;
+            border-left: 0px;
+            border-right: 0px;
+            width: 210px;
+            height: 35px;
+            
+        }
+        #result
+        {
+            color: rgb(10, 129, 129);
+        }
+    </style>
+</head>
+<body>
+    <center>
+        <div class="container">
+            <h2 id="result" style="">The Result</h2>
+            
+            <input type="text" id="field" disabled>
+            <br>
+            <br>
+            <button class="oper" onclick="cleared()">c</button>
+            <button class="oper" onclick="doOperation('+-')">+/-</button> 
+            <button class="oper" onclick="doOperation('%')">%</button> 
+            <button class="oper" onclick="doOperation('/')">/</button> 
+            <br>
+            <button class="num" onclick="numberBtnClick('7')">7</button>
+            <button class="num" onclick="numberBtnClick('8')">8</button> 
+            <button class="num" onclick="numberBtnClick('9')">9</button> 
+            <button class="oper" onclick="doOperation('*')">*</button> 
+            <br>
+            <button class="num" onclick="numberBtnClick('4')">4</button>
+            <button class="num" onclick="numberBtnClick('5')">5</button> 
+            <button class="num" onclick="numberBtnClick('6')">6</button> 
+            <button class="oper" onclick="doOperation('-')">-</button> 
+            <br>
+            <button class="num" onclick="numberBtnClick('1')">1</button>
+            <button class="num" onclick="numberBtnClick('2')">2</button> 
+            <button class="num" onclick="numberBtnClick('3')">3</button> 
+            <button class="oper" onclick="doOperation('+')">+</button> 
+            <br>
+            <button class="num" onclick="numberBtnClick('0')" style="width: 110px;">0</button>
+            <button class="num" onclick="numberBtnClick('.')">.</button> 
+            <button class="oper" onclick="executeOperation()">=</button>  
+            <br>
+        </div>
+    </center>
+    <script>
+       let screen = document.getElementById("field");
+       let res = document.getElementById("result");
+
+             function cleared() {
+                
+                screen.value = "";
+                res.innerHTML="The Result"
+            }
+
+
+            function numberBtnClick(num){
+               screen.value += num;
+            }
+            let firstNumber;
+            let operation;
+    
+            function doOperation(op){
+
+                if(op == "+-")
+                {
+                    firstNumber  = -1 * Number(screen.value);
+                    screen.value = firstNumber;
+                }
+                else
+                {
+                    
+                    firstNumber = Number(screen.value);
+                    operation = op;
+                    screen.value = ""; 
+                }
+               
+            }
+    
+            function executeOperation(){
+                let secondNumber =  Number(screen.value);
+                
+                switch(operation){
+                    case '+':
+                        result = firstNumber + secondNumber;
+                    break;
+                    case '-':
+                        result = firstNumber - secondNumber;
+                    break;
+                    case '/':
+                        result = firstNumber / secondNumber;
+                    break;
+                    case '*':
+                        result = firstNumber * secondNumber;
+                    break;
+                    case '%':
+                        result = firstNumber % secondNumber;
+                    break;
+                }
+    
+                firstNumber =result;
+                res.innerHTML = result;
+            } 
+    </script>
+</body>
+</html>
